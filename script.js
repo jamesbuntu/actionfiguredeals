@@ -47,10 +47,20 @@
     return "$" + Number(amount).toFixed(2);
   }
 
+  function decodeHtmlEntities(text) {
+    var el = document.createElement("textarea");
+    el.innerHTML = text;
+    return el.value;
+  }
+
   function escapeHtml(text) {
     var div = document.createElement("div");
     div.textContent = text;
     return div.innerHTML;
+  }
+
+  function displayText(text) {
+    return escapeHtml(decodeHtmlEntities(text));
   }
 
   function sortDeals(deals) {
@@ -98,7 +108,7 @@
       escapeHtml(label) +
       "</p>" +
       '<h2 class="card-title">' +
-      escapeHtml(deal.title) +
+      displayText(deal.title) +
       "</h2>" +
       '<div class="prices">' +
       '<span class="price-new">' +
